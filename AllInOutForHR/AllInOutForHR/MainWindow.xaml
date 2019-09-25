@@ -31,6 +31,7 @@
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="ФИО" Binding="{Binding fio}" Width="300" />
                 <DataGridTextColumn Header="Дата" Binding="{Binding TimeVal, StringFormat=dd.MM.yyyy HH:mm:ss}" Width="180" />
+                <DataGridTextColumn Header="День недели" Binding="{Binding DayOfTheWeek}" Width="180" />
                 <DataGridTextColumn Header="Вошёл/Вышел" Binding="{Binding ModeInOut}" Width="180" />
                 <DataGridTextColumn Header="Отдел" Binding="{Binding DivName}" Width="400" />
                 <DataGridTextColumn Header="Точка входа/выхода" Binding="{Binding PointName}" Width="400" />

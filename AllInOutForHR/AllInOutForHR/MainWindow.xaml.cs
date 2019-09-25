@@ -24,7 +24,6 @@ namespace AllInOutForHR
             table = new DataTable();
             adapter.Fill(table);
             dataGrid.ItemsSource = table.DefaultView;
-
         }
         private void initializeDB()
         {
@@ -38,7 +37,16 @@ namespace AllInOutForHR
                                                          case [Mode] 
                                                               when 1 then 'Вход'
                                                               when 2 then 'Выход'
-                                                          end as ModeInOut, 
+                                                          end as ModeInOut,
+                                                            CASE DATEDIFF(DAY,0, TimeVal)%7
+								                              WHEN 0 THEN 'Понедельник'
+								                              WHEN 1 THEN 'Вторник'
+								                              WHEN 2 THEN 'Среда'
+								                              WHEN 3 THEN 'Четверг'
+								                              WHEN 4 THEN 'Пятница'
+								                              WHEN 5 THEN 'Суббота'
+								                              WHEN 6 THEN 'Воскресенье'
+								                            END [DayOfTheWeek],
                                                           DivName, PointName FROM [OrionLight].[dbo].[AllInOutForHR] 
                                                           WHERE SurName + ' ' + FirstName + ' ' + SecondName = '" + UserClass.Username + "' ORDER BY TimeVal", sqlconnection);
                 adapter = new SqlDataAdapter(command);
@@ -67,6 +75,15 @@ namespace AllInOutForHR
                                   when 1 then 'Вход'
                                   when 2 then 'Выход'
                               end as ModeInOut, 
+							    CASE DATEDIFF(DAY,0, TimeVal)%7
+									WHEN 0 THEN 'Понедельник'
+									WHEN 1 THEN 'Вторник'
+									WHEN 2 THEN 'Среда'
+									WHEN 3 THEN 'Четверг'
+									WHEN 4 THEN 'Пятница'
+									WHEN 5 THEN 'Суббота'
+									WHEN 6 THEN 'Воскресенье'
+								END [DayOfTheWeek],
                               DivName, PointName FROM [OrionLight].[dbo].[AllInOutForHR] WHERE 
                               SurName + ' ' + FirstName + ' ' + SecondName = '" + UserClass.Username + "' and TimeVal between '" + date1 + "' and '" + date2 + "' ORDER BY TimeVal";
                 SqlConnection sqlconnection = new SqlConnection();
@@ -157,14 +174,14 @@ namespace AllInOutForHR
 
                 workbook.Close(); excel.Quit();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
         private void buttonExcel_Click(object sender, RoutedEventArgs e)
         {
-                data2Exel(dataGrid);
+            data2Exel(dataGrid);
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)

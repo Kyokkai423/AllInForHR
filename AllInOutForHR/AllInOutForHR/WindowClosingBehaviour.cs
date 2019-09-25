@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Interactivity;
 using System.Windows.Media.Animation;
@@ -16,7 +17,7 @@ namespace AllInOutForHR
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AssociatedObject_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void AssociatedObject_Closing(object sender, CancelEventArgs e)
         {
             UsersList window = sender as UsersList;
             window.Closing -= AssociatedObject_Closing;
